@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MouseController : MonoBehaviour
+public class MousePointer : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private CubeMultiplyer _cubeMultiplyer;

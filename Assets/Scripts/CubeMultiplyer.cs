@@ -10,7 +10,7 @@ public class CubeMultiplyer : MonoBehaviour
     {
         if (Random.value <= cube.MultiplyChance)
         {
-            List<Cube> newCubes = _spawner.Multiply(cube);
+            List<Cube> newCubes = _spawner.SpawnCubes(cube);
             _exploader.Explode(cube.transform.position, GetCubesRigidbody(newCubes));
         }
         else

@@ -12,7 +12,7 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField] private int _newCubesMin = 2;
     [SerializeField] private int _newCubesMax = 6;
 
-    public List<Cube> Multiply(Cube cube)
+    public List<Cube> SpawnCubes(Cube cube)
     {
         Vector3 newCubeScale = cube.transform.localScale * _sizeDecreasing;
         Vector3 newCubePosition = cube.transform.position;
