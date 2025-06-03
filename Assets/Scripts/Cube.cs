@@ -1,24 +1,19 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Cube : MonoBehaviour 
 {
-    [SerializeField] private MeshRenderer _meshRenderer;
-    [SerializeField] private Rigidbody _rigidbody;
-
     public float MultiplyChance { get; private set; } = 1f;
+    public Rigidbody Rigidbody { get; private set; }
 
-    public void AddExplosionForce(float force, Vector3 position, float radius)
+    private void Awake()
     {
-        _rigidbody.AddExplosionForce(force, position, radius);
+        Rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void DecreaseMultiplyChance(float previousChance, float multiplyChanceDecreasing)
+    public void Construct(float multiplyChance, Vector3 scale)
     {
-        MultiplyChance = previousChance * multiplyChanceDecreasing;
-    }
-
-    public void ChangeMaterial(Material material)
-    {
-        _meshRenderer.material = material;
+        MultiplyChance = multiplyChance;
+        transform.localScale = scale;
     }
 }

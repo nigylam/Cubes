@@ -12,7 +12,10 @@ public class MouseController : MonoBehaviour
     {
         _mouseRay = _camera.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast( _mouseRay, out _hit) && _hit.transform.TryGetComponent<Cube>(out Cube cube) && Input.GetMouseButtonUp(0))
-            _cubeMultiplyer.TryMultiply(cube);
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (Physics.Raycast(_mouseRay, out _hit) && _hit.transform.TryGetComponent<Cube>(out Cube cube))
+                _cubeMultiplyer.TryMultiply(cube);
+        }
     }
 }

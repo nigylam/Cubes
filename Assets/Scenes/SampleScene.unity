@@ -632,6 +632,9 @@ GameObject:
   - component: {fileID: 1141030081}
   - component: {fileID: 1141030080}
   - component: {fileID: 1141030082}
+  - component: {fileID: 1141030085}
+  - component: {fileID: 1141030084}
+  - component: {fileID: 1141030083}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -680,16 +683,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f1b26e4e1df61947bc4b1755a107040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cubePrefab: {fileID: 5389102593927717073, guid: 6444ca032fef44a4281aea77c7c0b2bf, type: 3}
-  _cubeParrent: {fileID: 821302522}
-  _explosionEffect: {fileID: 417761080263594739, guid: 7800b8f6b712bfe49bd663eeb3ebe1e4, type: 3}
-  _disappearingEffect: {fileID: 74078499623404260, guid: 9790383d97594f049aecba8cf470e3b7, type: 3}
-  _sizeDecreasing: 0.5
-  _multiplyChanceDecreasing: 0.5
-  _newCubesMin: 2
-  _newCubesMax: 6
-  _cubeExplosionForce: 50
-  _cubeExplosionRadius: 10
+  _exploader: {fileID: 1141030084}
+  _spawner: {fileID: 1141030085}
+--- !u!114 &1141030083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141030079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddde60e0781131d499d68be74b9cf17b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _cubeMaterials:
   - {fileID: 2100000, guid: 86bc3cb54aae0ce49be528ff0cc48b60, type: 2}
   - {fileID: 2100000, guid: b51eaa34858bd4c4c9a0a7d9e5ce4b76, type: 2}
@@ -698,6 +705,41 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ee35098ccf6794d44be56e4c5a0ca97d, type: 2}
   - {fileID: 2100000, guid: 3253c6213ae8cea4ba68b0ab2589e4d9, type: 2}
   - {fileID: 2100000, guid: 0e663582ad9ca63439faa6c7b80a5e46, type: 2}
+--- !u!114 &1141030084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141030079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecfedfd1801a79842b1eb94eb802b9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explosionEffect: {fileID: 417761080263594739, guid: 7800b8f6b712bfe49bd663eeb3ebe1e4, type: 3}
+  _disappearingEffect: {fileID: 74078499623404260, guid: 9790383d97594f049aecba8cf470e3b7, type: 3}
+  _cubeExplosionForce: 500
+  _cubeExplosionRadius: 10
+--- !u!114 &1141030085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141030079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c745a862989c76646b6dbcbd92f3e0c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cubePrefab: {fileID: 5389102593927717073, guid: 6444ca032fef44a4281aea77c7c0b2bf, type: 3}
+  _cubeParrent: {fileID: 821302522}
+  _colorChanger: {fileID: 1141030083}
+  _sizeDecreasing: 0.5
+  _multiplyChanceDecreasing: 0.5
+  _newCubesMin: 2
+  _newCubesMax: 6
 --- !u!1 &1242951688
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,15 +995,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2612808074196209967, guid: 6444ca032fef44a4281aea77c7c0b2bf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2612808074196209967, guid: 6444ca032fef44a4281aea77c7c0b2bf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2612808074196209967, guid: 6444ca032fef44a4281aea77c7c0b2bf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2612808074196209967, guid: 6444ca032fef44a4281aea77c7c0b2bf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
