@@ -6,8 +6,8 @@ public class Exploader : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _explosionEffect;
     [SerializeField] private ParticleSystem _disappearingEffect;
-    [SerializeField] private float _cubeExplosionForce = 500f;
-    [SerializeField] private float _cubeExplosionRadius = 10f;
+    [SerializeField] private float _multiplyExplosionForce = 500f;
+    [SerializeField] private float _multiplyExplosionRadius = 10f;
 
     private int _effectDeletingTime = 5;
     private WaitForSeconds _deleteParticleSystemDelay;
@@ -17,19 +17,46 @@ public class Exploader : MonoBehaviour
         _deleteParticleSystemDelay = new WaitForSeconds(_effectDeletingTime);
     }
 
-    public void Disappear(Vector3 effectPosition)
+    public void Disappear(Vector3 explodePosition, float explosionForce, float explosionRadius)
     {
-        ParticleSystem disappearingEffect = Instantiate(_disappearingEffect, effectPosition, Quaternion.identity);
+        ParticleSystem disappearingEffect = Instantiate(_disappearingEffect, explodePosition, Quaternion.identity);
         StartCoroutine(DestroyEffectAfterDelay(disappearingEffect.gameObject));
+
+        ExplodeAllCubes(explodePosition, explosionForce, explosionRadius);
     }
 
-    public void Explode(Vector3 explodePosition, List<Rigidbody> cubesToExplode)
+    public void ExplodeChildCubes(Vector3 explodePosition, List<Rigidbody> cubesToExplode)
     {
         ParticleSystem explosionEffect = Instantiate(_explosionEffect, explodePosition, Quaternion.identity);
         StartCoroutine(DestroyEffectAfterDelay(explosionEffect.gameObject));
 
-        foreach(Rigidbody cube in cubesToExplode)
-            cube.AddExplosionForce(_cubeExplosionForce, explodePosition, _cubeExplosionRadius);
+        Explode(cubesToExplode, _multiplyExplosionForce, _multiplyExplosionRadius, explodePosition);
+    }
+
+    private void ExplodeAllCubes(Vector3 position, float force, float radius)
+    {
+        Explode(GetExplodableObjects(position, radius), force, radius, position);
+    }
+
+    private void Explode(List<Rigidbody> objectsToExplode, float force, float radius, Vector3 position)
+    {
+        foreach (Rigidbody obj in objectsToExplode)
+            obj.AddExplosionForce(_multiplyExplosionForce, position, _multiplyExplosionRadius);
+    }
+
+    private List<Rigidbody> GetExplodableObjects(Vector3 position, float radius)
+    {
+        Collider[] hits = Physics.OverlapSphere(position, radius);
+
+        List<Rigidbody> cubes = new();
+
+        foreach (Collider hit in hits)
+        {
+            if (hit.TryGetComponent(out Cube cube))
+                cubes.Add(cube.Rigidbody);
+        }
+
+        return cubes;
     }
 
     private IEnumerator DestroyEffectAfterDelay(GameObject effectObject)

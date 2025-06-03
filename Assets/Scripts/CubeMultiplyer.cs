@@ -11,11 +11,11 @@ public class CubeMultiplyer : MonoBehaviour
         if (Random.value <= cube.MultiplyChance)
         {
             List<Cube> newCubes = _spawner.SpawnCubes(cube);
-            _exploader.Explode(cube.transform.position, GetCubesRigidbody(newCubes));
+            _exploader.ExplodeChildCubes(cube.transform.position, GetCubesRigidbody(newCubes));
         }
         else
         {
-            _exploader.Disappear(cube.transform.position);
+            _exploader.Disappear(cube.transform.position, cube.ExplosionForce, cube.ExplosionRadius);
         }
 
         Destroy(cube.gameObject);
